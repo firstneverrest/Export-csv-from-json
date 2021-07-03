@@ -29,21 +29,37 @@ const download = (data) => {
   document.body.removeChild(csvFile);
 };
 
-const convertDataToTable = (data) => {};
+const createTableFromData = () => {
+  getData().then((data) => {
+    let table = document.getElementById('dataTable');
+    for (let i = 0; i < data.length; i++) {
+      let row = `<tr>
+                   <td>${data[i].id}</td>
+                   <td>${data[i].userId}</td>
+                   <td>${data[i].title}</td>
+                   <td>${data[i].completed}</td>
+                </tr>`;
+
+      table.innerHTML += row;
+    }
+  });
+};
 
 const getData = async () => {
   const jsonUrl = 'https://jsonplaceholder.typicode.com/todos';
   const res = await fetch(jsonUrl);
-  const json = await res.json();
+  const jsonData = await res.json();
 
-  const data = json.map((row) => ({
-    id: row.id,
-    userId: row.userId,
-    title: row.title,
-    completed: row.completed,
-  }));
+  if (jsonData) {
+    const data = jsonData.map((row) => ({
+      id: row.id,
+      userId: row.userId,
+      title: row.title,
+      completed: row.completed,
+    }));
 
-  return data;
+    return data;
+  }
 };
 
 const exportToCSV = () => {
@@ -52,5 +68,10 @@ const exportToCSV = () => {
   });
 };
 
-const buttonExportToCsv = document.getElementById('btnExportToCsv');
-buttonExportToCsv.addEventListener('click', exportToCSV);
+const main = () => {
+  const buttonExportToCsv = document.getElementById('btnExportToCsv');
+  buttonExportToCsv.addEventListener('click', exportToCSV);
+  createTableFromData();
+};
+
+main();

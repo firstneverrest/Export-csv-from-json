@@ -28,6 +28,12 @@ body {
   background-color: #ffff00;
 }
 
+#dataTable tr td:nth-child(1),
+#dataTable tr td:nth-child(2),
+#dataTable tr td:nth-child(4) {
+  text-align: center;
+}
+
 #btnExportToCsv {
   font-family: 'Prompt', sans-serif;
   font-size: 14px;
