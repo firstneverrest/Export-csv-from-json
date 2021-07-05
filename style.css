@@ -13,6 +13,10 @@ body {
   margin: 1rem 2rem;
 }
 
+#btnExportToCsv {
+  margin-top: 10px;
+}
+
 #dataTable {
   margin: 20px 0;
   border-collapse: collapse;
